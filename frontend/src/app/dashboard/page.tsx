@@ -6,7 +6,7 @@
  */
 
 import Link from 'next/link';
-import { useAuthStore } from '@/lib/store';
+import { useAuthStore, useHasHydrated } from '@/lib/store';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { Button } from '@/components/ui/button';
@@ -26,15 +26,16 @@ import {
 
 export default function DashboardPage() {
   const { user, isAuthenticated } = useAuthStore();
+  const hasHydrated = useHasHydrated();
   const router = useRouter();
 
   useEffect(() => {
-    if (!isAuthenticated) {
+    if (hasHydrated && !isAuthenticated) {
       router.push('/auth/login');
     }
-  }, [isAuthenticated, router]);
+  }, [hasHydrated, isAuthenticated, router]);
 
-  if (!isAuthenticated || !user) {
+  if (!hasHydrated || !isAuthenticated || !user) {
     return null;
   }
 

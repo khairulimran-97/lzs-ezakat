@@ -5,7 +5,7 @@
  * Manage users, amil, and companies with search, filter, and CRUD operations
  */
 
-import { useAuthStore } from '@/lib/store';
+import { useAuthStore, useHasHydrated } from '@/lib/store';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Header } from '@/components/layout/header';
@@ -49,6 +49,7 @@ interface MockUser {
 
 export default function AdminUsersPage() {
   const { user, isAuthenticated } = useAuthStore();
+  const hasHydrated = useHasHydrated();
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState('');
   const [roleFilter, setRoleFilter] = useState<string>('all');

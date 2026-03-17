@@ -5,7 +5,7 @@
  * Admin dashboard with reports, analytics, and monitoring
  */
 
-import { useAuthStore } from '@/lib/store';
+import { useAuthStore, useHasHydrated } from '@/lib/store';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import Link from 'next/link';
@@ -29,6 +29,7 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsive
 
 export default function AdminDashboardPage() {
   const { user, isAuthenticated } = useAuthStore();
+  const hasHydrated = useHasHydrated();
   const router = useRouter();
 
   useEffect(() => {

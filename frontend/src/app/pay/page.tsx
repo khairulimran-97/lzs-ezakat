@@ -40,7 +40,7 @@ import {
   Building
 } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
-import { useAuthStore } from '@/lib/store';
+import { useAuthStore, useHasHydrated } from '@/lib/store';
 
 interface PaymentMethod {
   id: string;
@@ -126,6 +126,7 @@ function PaymentPageContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const { isAuthenticated } = useAuthStore();
+  const hasHydrated = useHasHydrated();
   
   const amount = parseFloat(searchParams.get('amount') || '0');
   const zakatType = searchParams.get('type') || 'pendapatan';

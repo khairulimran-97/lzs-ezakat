@@ -5,7 +5,7 @@
  * Dashboard for amil to view collections, commissions, and performance
  */
 
-import { useAuthStore } from '@/lib/store';
+import { useAuthStore, useHasHydrated } from '@/lib/store';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import Link from 'next/link';
@@ -29,6 +29,7 @@ import {
 
 export default function AmilDashboardPage() {
   const { user, isAuthenticated } = useAuthStore();
+  const hasHydrated = useHasHydrated();
   const router = useRouter();
 
   useEffect(() => {

@@ -5,7 +5,7 @@
  * View commission history and payments
  */
 
-import { useAuthStore } from '@/lib/store';
+import { useAuthStore, useHasHydrated } from '@/lib/store';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -16,6 +16,7 @@ import { DollarSign, CheckCircle2, Clock, Calendar, Receipt, CreditCard, MapPin 
 
 export default function AmilCommissionsPage() {
   const { user, isAuthenticated } = useAuthStore();
+  const hasHydrated = useHasHydrated();
   const router = useRouter();
 
   useEffect(() => {

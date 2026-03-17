@@ -5,6 +5,7 @@
 
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
+import { useState, useEffect } from 'react';
 
 interface User {
   id: string;
@@ -89,6 +90,22 @@ export const useIsAuthenticated = () => {
   const user = useAuthStore((state) => state.user);
   const token = useAuthStore((state) => state.token);
   return !!(user && token);
+};
+
+// Hook to check if store has been hydrated from localStorage
+export const useHasHydrated = () => {
+  const [hasHydrated, setHasHydrated] = useState(false);
+  useEffect(() => {
+    const unsub = useAuthStore.persist.onFinishHydration(() => {
+      setHasHydrated(true);
+    });
+    // If already hydrated
+    if (useAuthStore.persist.hasHydrated()) {
+      setHasHydrated(true);
+    }
+    return () => { unsub(); };
+  }, []);
+  return hasHydrated;
 };
 
 // UI Store

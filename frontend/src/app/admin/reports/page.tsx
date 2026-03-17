@@ -5,7 +5,7 @@
  * View and export various reports with professional layouts
  */
 
-import { useAuthStore } from '@/lib/store';
+import { useAuthStore, useHasHydrated } from '@/lib/store';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -39,6 +39,7 @@ interface PaymentRecord {
 
 export default function AdminReportsPage() {
   const { user, isAuthenticated } = useAuthStore();
+  const hasHydrated = useHasHydrated();
   const router = useRouter();
   const [reportType, setReportType] = useState<ReportType>('daily_summary');
   const [dateFrom, setDateFrom] = useState(new Date().toISOString().split('T')[0]);

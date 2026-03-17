@@ -5,7 +5,7 @@
  * Manage WhatsApp / Email / SMS notifications and automated campaigns.
  */
 
-import { useAuthStore } from '@/lib/store';
+import { useAuthStore, useHasHydrated } from '@/lib/store';
 import { useRouter } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
 import { Header } from '@/components/layout/header';
@@ -41,6 +41,7 @@ type Recipient = {
 
 export default function AdminCommunicationsPage() {
   const { user, isAuthenticated } = useAuthStore();
+  const hasHydrated = useHasHydrated();
   const router = useRouter();
   const [activeChannel, setActiveChannel] = useState<Channel>('whatsapp');
   const [isHaulCampaignActive, setIsHaulCampaignActive] = useState(false);

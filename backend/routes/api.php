@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 
 // Public Routes
 Route::post('/login', [AuthController::class, 'login']);
+Route::post('/auth/login', [AuthController::class, 'login']);
 Route::get('/ping', function () {
     return ['status' => 'ok', 'message' => 'API is working'];
 });

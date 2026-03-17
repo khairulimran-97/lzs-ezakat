@@ -5,7 +5,7 @@
  * View all collections made by amil with filter by district and pagination
  */
 
-import { useAuthStore } from '@/lib/store';
+import { useAuthStore, useHasHydrated } from '@/lib/store';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -48,6 +48,7 @@ const SELANGOR_DISTRICTS = [
 
 export default function AmilCollectionsPage() {
   const { user, isAuthenticated } = useAuthStore();
+  const hasHydrated = useHasHydrated();
   const router = useRouter();
   const [selectedDistrict, setSelectedDistrict] = useState<string>('Semua Daerah');
   const [searchQuery, setSearchQuery] = useState('');
